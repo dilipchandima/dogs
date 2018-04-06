@@ -1,14 +1,35 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Constants } from 'expo';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import axios from 'axios';
+import axiosMiddleware from 'redux-axios-middleware';
 
-export default class App extends React.Component {
+import reducer from './reducer';
+import BleedList from './BleedList';
+
+/**
+ * Base URL definitions
+ */
+const client = axios.create({
+  baseURL: 'https://dog.ceo/api',
+  responseType: 'json'
+});
+
+/**
+ * Create the Store
+ */
+const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
+
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
+      <Provider store={store}>
+        <View style={styles.container}>
+          <BleedList />
+        </View>
+      </Provider>
     );
   }
 }
@@ -16,8 +37,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#ecf0f1',
+  }
 });
