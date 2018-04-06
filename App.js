@@ -7,7 +7,18 @@ import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
 
 import reducer from './reducer';
-import BleedList from './BleedList';
+import BreedList from './BreedList';
+import { StackNavigator } from 'react-navigation';
+import BreedDetails from './BreedDetails';
+
+const Stack = StackNavigator({
+  Home: {
+    screen: BreedList
+  },
+  Detail: {
+    screen: BreedDetails
+  }
+});
 
 /**
  * Base URL definitions
@@ -27,7 +38,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <BleedList />
+          <Stack />
         </View>
       </Provider>
     );
