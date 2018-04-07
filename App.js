@@ -8,15 +8,11 @@ import axiosMiddleware from 'redux-axios-middleware';
 
 import reducer from './reducer';
 import BreedList from './BreedList';
-import Splsh from './Splsh';
 
 import { StackNavigator } from 'react-navigation';
 import BreedDetails from './BreedDetails';
 
 const Stack = StackNavigator({
-  Splsh: {
-    screen: Splsh
-  },
   Home: {
     screen: BreedList
   },
