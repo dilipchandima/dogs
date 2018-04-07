@@ -10,7 +10,10 @@ export const GET_RANDOM_IMAGE = 'LOAD_IMAGE';
 export const GET_RANDOM_IMAGE_SUCCESS = 'LOAD_IMAGE_SUCCESS';
 export const GET_RANDOM_IMAGE_FAIL = 'LOAD_IMAGE_FAIL';
 
-export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+export const SEARCH_BREEDS = 'SEARCH_BREEDS';
+
+export default function reducer(state = { breeds: [], breedsSearched: [], subBreeds: [], searchText: "" }, action) {
   switch (action.type) {
 
     // Get Bleed types
@@ -18,7 +21,7 @@ export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
       return { ...state, loading: true };
 
     case GET_BREEDS_SUCCESS:
-      return { ...state, loading: false, breeds: action.payload.data.message };
+      return { ...state, loading: false, breeds: action.payload.data.message, breedsSearched: action.payload.data.message };
 
     case GET_BREEDS_FAIL:
       return {
@@ -46,7 +49,6 @@ export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
       return { ...state, loadingImg: true };
 
     case GET_RANDOM_IMAGE_SUCCESS:
-    console.log("yurrrrrrrrrr ========= ", action.payload.data )
       return { ...state, loadingImg: false, imgUrl: action.payload.data.message };
 
     case GET_RANDOM_IMAGE_FAIL:
@@ -55,6 +57,12 @@ export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
         loadingImg: false,
         error: 'Error while fetching data'
       };
+
+    case SET_SEARCH_TEXT:
+      return { ...state, searchText: action.payload.searchText }
+
+    case SEARCH_BREEDS:
+      return { ...state, breedsSearched: action.payload.searchBreeds }
 
     default:
       return state;
@@ -92,4 +100,22 @@ export function getImage(bleed) {
       }
     }
   };
+}
+
+export function setSearchText(text) {
+  return {
+    type: SET_SEARCH_TEXT,
+    payload: {
+      searchText: `${text}`
+    }
+  }
+}
+
+export function searchBreeds(breeds) {
+  return {
+    type: SEARCH_BREEDS,
+    payload: {
+      searchBreeds: breeds
+    }
+  }
 }

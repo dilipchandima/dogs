@@ -25,15 +25,19 @@ class BreedDetails extends Component {
   }
 
   render() {
+    const { name } = this.props.navigation.state.params
     const { subBreeds, loadingSubBreeds, imgUrl, loadingImg } = this.props;
 
-    if (loadingSubBreeds) return <Text>Loading...</Text>;
+    if (loadingSubBreeds && loadingImg) return <Text>Loading...</Text>;
 
-    if (subBreeds.length == 0) return <Text>No Existing Sub Breeds</Text>
+    var listExist = <Text></Text>;
+    if (subBreeds.length == 0) {
+      listExist = <Text>No Existing Sub Breeds</Text>;
+    }
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>SubBreeds</Text>
+        <Text style={styles.title}>SubBreeds - {name}</Text>
         <Image
           style={styles.imageStyle}
           source={{ uri: imgUrl }}
@@ -43,6 +47,7 @@ class BreedDetails extends Component {
           title="Load Random Image"
           color="#841584"
         />
+        {listExist}
         <FlatList
           data={subBreeds}
           renderItem={this.renderItem}
@@ -52,7 +57,6 @@ class BreedDetails extends Component {
   }
 
 }
-
 
 const styles = StyleSheet.create({
   container: {
