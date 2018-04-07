@@ -2,9 +2,13 @@ export const GET_BREEDS = 'LOAD_BREEDS';
 export const GET_BREEDS_SUCCESS = 'LOAD_BREEDS_SUCCESS';
 export const GET_BREEDS_FAIL = 'LOAD_BREEDS_FAIL';
 
-export const GET_SUB_BREEDS = 'LOAD_SUB_BREEDS'
-export const GET_SUB_BREEDS_SUCCESS = 'LOAD_SUB_BREEDS_SUCCESS'
-export const GET_SUB_BREEDS_FAIL = 'LOAD_SUB_BREEDS_FAIL'
+export const GET_SUB_BREEDS = 'LOAD_SUB_BREEDS';
+export const GET_SUB_BREEDS_SUCCESS = 'LOAD_SUB_BREEDS_SUCCESS';
+export const GET_SUB_BREEDS_FAIL = 'LOAD_SUB_BREEDS_FAIL';
+
+export const GET_RANDOM_IMAGE = 'LOAD_IMAGE';
+export const GET_RANDOM_IMAGE_SUCCESS = 'LOAD_IMAGE_SUCCESS';
+export const GET_RANDOM_IMAGE_FAIL = 'LOAD_IMAGE_FAIL';
 
 export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
   switch (action.type) {
@@ -37,6 +41,21 @@ export default function reducer(state = { breeds: [], subBreeds: [] }, action) {
         error: 'Error while fetching data'
       };
 
+    // Get images
+    case GET_RANDOM_IMAGE:
+      return { ...state, loadingImg: true };
+
+    case GET_RANDOM_IMAGE_SUCCESS:
+    console.log("yurrrrrrrrrr ========= ", action.payload.data )
+      return { ...state, loadingImg: false, imgUrl: action.payload.data.message };
+
+    case GET_RANDOM_IMAGE_FAIL:
+      return {
+        ...state,
+        loadingImg: false,
+        error: 'Error while fetching data'
+      };
+
     default:
       return state;
   }
@@ -59,6 +78,17 @@ export function listSubBreeds(bleed) {
     payload: {
       request: {
         url: `/breed/${bleed}/list`
+      }
+    }
+  };
+}
+
+export function getImage(bleed) {
+  return {
+    type: GET_RANDOM_IMAGE,
+    payload: {
+      request: {
+        url: `/breed/${bleed}/images/random`
       }
     }
   };
