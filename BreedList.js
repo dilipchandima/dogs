@@ -9,7 +9,12 @@ import { searchBreeds } from './reducer';
 class BreedList extends Component {
 
   static navigationOptions = {
-    title: 'Dog Breeds'
+    title: 'Dog Breeds',
+    headerLeft: null,
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#3498db'
+    },
   };
 
   changeTextHandler = text => {
@@ -28,8 +33,8 @@ class BreedList extends Component {
       if (item.includes(searchText))
         return item;
     })
-    this.props.searchBreeds(searchBreedArray);
 
+    this.props.searchBreeds(searchBreedArray);
   }
 
   componentDidMount() {
@@ -73,12 +78,12 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc'
+    borderBottomWidth: 2,
+    borderBottomColor: '#19B5FE',
   },
   textInput: {
     padding: 20,
-    borderColor: "gray",
+    borderColor: '#19B5FE',
     width: "100%"
   }
 });

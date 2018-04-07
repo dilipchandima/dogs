@@ -6,7 +6,11 @@ import { getImage } from './reducer';
 
 class BreedDetails extends Component {
   static navigationOptions = {
-    title: 'BreedDetails'
+    title: 'BreedDetails',
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#3498db'
+    },
   };
 
   renderItem = ({ item }) => (
@@ -30,14 +34,14 @@ class BreedDetails extends Component {
 
     if (loadingSubBreeds && loadingImg) return <Text>Loading...</Text>;
 
-    var listExist = <Text></Text>;
+    var listExist = <Text style={styles.subbreedtitle}>Sub breeds for {name}</Text>;
     if (subBreeds.length == 0) {
-      listExist = <Text>No Existing Sub Breeds</Text>;
+      listExist = <Text style={styles.nodata}>No Existing Sub Breeds</Text>;
     }
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>SubBreeds - {name}</Text>
+        <Text style={styles.title}>{name}</Text>
         <Image
           style={styles.imageStyle}
           source={{ uri: imgUrl }}
@@ -70,12 +74,24 @@ const styles = StyleSheet.create({
   title: {
     padding: 20,
     borderBottomWidth: 2,
-    borderBottomColor: '#0cc'
+    borderBottomColor: '#0cc',
+    fontSize: 40,
+    color: '#fff',
+    backgroundColor: '#003171',
+    textAlign: 'center'
   },
   imageStyle: {
     height: 300,
     flex: 1,
     width: null
+  },
+  nodata: {
+    paddingTop: 50,
+    textAlign: 'center'
+  },
+  subbreedtitle:{
+    paddingTop: 20,
+    textAlign: 'center'
   }
 });
 
