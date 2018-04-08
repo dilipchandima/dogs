@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, Image, Button } from 'react-native';
 import { connect } from 'react-redux';
-import { listSubBreeds } from './reducer';
-import { getImage } from './reducer';
+import { listSubBreeds, getImage } from './breedDetailsAction';
 
+/**
+ * Breed List Component 
+ */
 class BreedDetails extends Component {
+
   static navigationOptions = {
     title: 'BreedDetails',
     headerTintColor: '#fff',
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     textAlign: 'center'
   },
-  subbreedtitle:{
+  subbreedtitle: {
     paddingTop: 20,
     textAlign: 'center'
   }

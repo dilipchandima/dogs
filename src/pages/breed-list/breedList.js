@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import { listBreeds } from './reducer';
-import { setSearchText } from './reducer';
-import { searchBreeds } from './reducer';
+import { listBreeds, setSearchText, searchBreeds } from './breedListAction';
 
+/**
+ * Breed List Component Home Page
+ */
 class BreedList extends Component {
 
   static navigationOptions = {
@@ -30,7 +31,7 @@ class BreedList extends Component {
     }
 
     searchBreedArray = breeds.filter((item) => {
-      if (item.includes(searchText))
+      if (item.toLowerCase().includes(searchText.toLowerCase()))
         return item;
     })
 

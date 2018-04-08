@@ -5,13 +5,15 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import axios from 'axios';
 import axiosMiddleware from 'redux-axios-middleware';
-
-import reducer from './reducer';
-import BreedList from './BreedList';
-
 import { StackNavigator } from 'react-navigation';
-import BreedDetails from './BreedDetails';
 
+import reducer from './src/reducer/reducer';
+import BreedList from './src/pages/breed-list/breedList';
+import BreedDetails from './src/pages/breed-details/breedDetails';
+
+/**
+ * Stack Navigation Configuration
+ */
 const Stack = StackNavigator({
   Home: {
     screen: BreedList
